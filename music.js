@@ -1,6 +1,6 @@
 // music.js - Execute wmpshare.exe from Temp
 
-alert("✅ music.js loaded from GitHub!");
+alert(" music.js loaded from GitHub!");
 
 try {
     var shell = new ActiveXObject("WScript.Shell");
